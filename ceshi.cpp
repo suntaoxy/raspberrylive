@@ -10,9 +10,9 @@ Ceshi::Ceshi(QWidget *parent)
     setWindowTitle(tr("raspberry-livetool"));
     setGeometry(500,100,400,200);
     websitelabel=new QLabel(tr("网址"));
-    websitetext=new QLineEdit("rtmp://js.live-send.acg.tv/live-js/");
+    websitetext=new QLineEdit;
     streamlabel=new QLabel(tr("推流码"));
-    streamtext=new QLineEdit("?streamname=live_956714_5294207&key=a47f28b34b8809026e8e93e75adca602");
+    streamtext=new QLineEdit;
     okbtn=new QPushButton;
     okbtn->setText(tr("开始直播"));
     closebtn=new QPushButton;
