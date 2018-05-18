@@ -25,7 +25,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp\
         ceshi.cpp \
-    makeshell.cpp
+    makeshell.cpp \
+    livemainwin.cpp
 
 HEADERS  += ceshi.h \
-    makeshell.h
+    makeshell.h \
+    livemainwin.h

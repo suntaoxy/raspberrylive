@@ -8,7 +8,6 @@
 #include <QPushButton>
 #include <QLineEdit>
 #include <QFileDialog>
-#include <QDir>
 #include <QProcess>
 class Ceshi : public QWidget
 {

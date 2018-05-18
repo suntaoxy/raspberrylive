@@ -2,12 +2,32 @@
 #define LIVEMAINWIN_H
 
 #include <QMainWindow>
+#include <QMenu>
+#include <QMenuBar>
+#include <QToolBar>
+#include <QAction>
+#include "ceshi.h"
 
-class livemainwin : public QMainWindow
+class Livemainwin : public QMainWindow
 {
     Q_OBJECT
 public:
-    explicit livemainwin(QWidget *parent = 0);
+    explicit Livemainwin(QWidget *parent = 0);
+    void createAction();
+    void createMenu();
+    void createToolBar();
+
+private:
+    Ceshi* excutool;
+    QMenu* fileMenu;
+//    QMenu* about;
+//    QMenu* test1;
+//    QMenu* test2;
+    QAction* displayjindu;
+//    QAction* displaynow_tvnum;
+//    QAction* disallinfo;
+    QToolBar* jinduToolBar;
+
 
 signals:
 

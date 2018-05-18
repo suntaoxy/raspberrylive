@@ -7,8 +7,8 @@
 Ceshi::Ceshi(QWidget *parent)
     : QWidget(parent)
 {
-    setWindowTitle(tr("raspberry-livetool"));
-    setGeometry(500,100,400,200);
+  // setWindowTitle(tr("raspberry-livetool"));
+  //  setGeometry(500,100,400,200);
     websitelabel=new QLabel(tr("网址"));
     websitetext=new QLineEdit;
     streamlabel=new QLabel(tr("推流码"));
