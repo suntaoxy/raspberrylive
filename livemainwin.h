@@ -6,13 +6,15 @@
 #include <QMenuBar>
 #include <QToolBar>
 #include <QAction>
+#include <QToolButton>
 #include "ceshi.h"
 
 class Livemainwin : public QMainWindow
 {
     Q_OBJECT
 public:
-    explicit Livemainwin(QWidget *parent = 0);
+     Livemainwin(QWidget *parent = 0);
+    ~Livemainwin();
     void createAction();
     void createMenu();
     void createToolBar();
@@ -20,13 +22,14 @@ public:
 private:
     Ceshi* excutool;
     QMenu* fileMenu;
-//    QMenu* about;
+    QMenu* about;
 //    QMenu* test1;
 //    QMenu* test2;
     QAction* displayjindu;
-//    QAction* displaynow_tvnum;
-//    QAction* disallinfo;
+    QAction* displaynow_tvnum;
+    QAction* disallinfo;
     QToolBar* jinduToolBar;
+    QToolButton* startlive;
 
 
 signals:
