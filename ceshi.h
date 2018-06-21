@@ -9,12 +9,14 @@
 #include <QLineEdit>
 #include <QFileDialog>
 #include <QProcess>
+
 class Ceshi : public QWidget
 {
     Q_OBJECT
 
 public:
     Ceshi(QWidget *parent = 0);
+    QString path_srt;
     ~Ceshi();
   //  QString get_path();
 private:

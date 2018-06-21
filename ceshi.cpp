@@ -4,15 +4,16 @@
 #include <QProcess>
 #include <QDebug>
 #include "makeshell.h"
+
 Ceshi::Ceshi(QWidget *parent)
     : QWidget(parent)
 {
   // setWindowTitle(tr("raspberry-livetool"));
   //  setGeometry(500,100,400,200);
     websitelabel=new QLabel(tr("网址"));
-    websitetext=new QLineEdit;
+    websitetext=new QLineEdit("rtmp://js.live-send.acg.tv/live-js/");
     streamlabel=new QLabel(tr("推流码"));
-    streamtext=new QLineEdit;
+    streamtext=new QLineEdit("?streamname=live_956714_5294207&key=a47f28b34b8809026e8e93e75adca602");
     okbtn=new QPushButton;
     okbtn->setText(tr("开始直播"));
     closebtn=new QPushButton;
@@ -47,7 +48,12 @@ Ceshi::Ceshi(QWidget *parent)
 void Ceshi::mkandexcute_shell()
 {
     QString rtmp = websitetext->text()+streamtext->text();
-    creat_shell(pathname->text(),rtmp);
+    if(path_srt.isEmpty())
+    {
+        creat_shell(pathname->text(),rtmp);
+    }
+    else
+        creat_srt_shell(pathname->text(),rtmp,path_srt);
 
     QString pathofshell = "sh " + QDir::currentPath() + "/raspliveshell.sh" ;
 

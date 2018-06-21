@@ -22,12 +22,14 @@ public:
 private:
     Ceshi* excutool;
     QMenu* fileMenu;
-    QMenu* about;
+    QMenu* aboutMenu;
+    QMenu* subtitleMenu;
 //    QMenu* test1;
 //    QMenu* test2;
     QAction* displayjindu;
     QAction* displaynow_tvnum;
     QAction* disallinfo;
+    QAction* addsrt;
     QToolBar* jinduToolBar;
     QToolButton* startlive;
 
@@ -35,6 +37,7 @@ private:
 signals:
 
 public slots:
+    void choose_srt();
 };
 
 #endif // LIVEMAINWIN_H
