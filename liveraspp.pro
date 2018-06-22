@@ -26,8 +26,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += main.cpp\
         ceshi.cpp \
     makeshell.cpp \
-    livemainwin.cpp
+    livemainwin.cpp \
+    moviemod.cpp
 
 HEADERS  += ceshi.h \
     makeshell.h \
-    livemainwin.h
+    livemainwin.h \
+    moviemod.h

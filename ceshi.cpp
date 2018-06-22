@@ -9,7 +9,7 @@ Ceshi::Ceshi(QWidget *parent)
     : QWidget(parent)
 {
   // setWindowTitle(tr("raspberry-livetool"));
-  //  setGeometry(500,100,400,200);
+  // setGeometry(500,100,400,200);
     websitelabel=new QLabel(tr("网址"));
     websitetext=new QLineEdit("rtmp://js.live-send.acg.tv/live-js/");
     streamlabel=new QLabel(tr("推流码"));
@@ -48,17 +48,13 @@ Ceshi::Ceshi(QWidget *parent)
 void Ceshi::mkandexcute_shell()
 {
     QString rtmp = websitetext->text()+streamtext->text();
-    if(path_srt.isEmpty())
-    {
-        creat_shell(pathname->text(),rtmp);
-    }
-    else
-        creat_srt_shell(pathname->text(),rtmp,path_srt);
+
+    creat_shell(pathname->text(),rtmp);
 
     QString pathofshell = "sh " + QDir::currentPath() + "/raspliveshell.sh" ;
 
    // qDebug() << pathofshell;
-   process_0->start(pathofshell);
+    process_0->start(pathofshell);
 }
 void Ceshi::showfile()
 {

@@ -8,6 +8,7 @@
 #include <QAction>
 #include <QToolButton>
 #include "ceshi.h"
+#include "moviemod.h"
 
 class Livemainwin : public QMainWindow
 {
@@ -21,6 +22,8 @@ public:
 
 private:
     Ceshi* excutool;
+    Moviemod* movie_excutool;
+
     QMenu* fileMenu;
     QMenu* aboutMenu;
     QMenu* subtitleMenu;
@@ -29,7 +32,8 @@ private:
     QAction* displayjindu;
     QAction* displaynow_tvnum;
     QAction* disallinfo;
-    QAction* addsrt;
+    QAction* turn_movie_mod;
+    QAction* turn_tv_mod;
     QToolBar* jinduToolBar;
     QToolButton* startlive;
 
@@ -37,7 +41,8 @@ private:
 signals:
 
 public slots:
-    void choose_srt();
+    void turntv();
+    void turnmovie();
 };
 
 #endif // LIVEMAINWIN_H
