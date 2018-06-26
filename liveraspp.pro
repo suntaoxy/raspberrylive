@@ -33,3 +33,5 @@ HEADERS  += ceshi.h \
     makeshell.h \
     livemainwin.h \
     moviemod.h
+
+RESOURCES +=

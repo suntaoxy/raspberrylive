@@ -39,6 +39,7 @@ public slots:
     void mkandexcute_shell();
     void showfile();
     void showsrt();
+
 };
 
 #endif // MOVIEMOD_H

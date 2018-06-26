@@ -35,6 +35,7 @@ private slots:
     void mkandexcute_shell();
 //    void closed_shell();
     void showfile();
+
 };
 
 #endif // CESHI_H

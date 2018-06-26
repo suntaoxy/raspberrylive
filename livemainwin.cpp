@@ -2,6 +2,7 @@
 #include "makeshell.h"
 #include<QFile>
 #include<QFileDialog>
+#include<QMessageBox>
 Livemainwin::Livemainwin(QWidget *parent) : QMainWindow(parent)
 {
     setWindowTitle(tr("树莓派直播工具"));
@@ -26,17 +27,18 @@ void Livemainwin::createAction()
    displayjindu->setStatusTip(tr("显示播放进度"));
 
    displaynow_tvnum = new QAction(QIcon("png1.png"),tr("显示集数"),this);
-   disallinfo = new QAction(QIcon("png2.png"),tr("其他信息"),this);
 
-   turn_movie_mod = new QAction(QIcon("choosemovie.png"),tr("电影模式"),this);
+   turn_movie_mod = new QAction(QIcon("icon/film.png"),tr("电影模式"),this);
    turn_movie_mod->setStatusTip(tr("播放单个电影文件"));
    connect(turn_movie_mod,SIGNAL(triggered(bool)),this,SLOT(turnmovie()));
 
-   turn_tv_mod = new QAction(QIcon("choose.png"),tr("电视剧模式"),this);
+   turn_tv_mod = new QAction(QIcon("icon/tv.png"),tr("电视剧模式"),this);
    turn_movie_mod->setStatusTip(tr("播放多集电视剧"));
    connect(turn_tv_mod,SIGNAL(triggered(bool)),this,SLOT(turntv()));
 
-
+   about_author = new QAction(tr("关于作者"),this);
+   about_author->setStatusTip(tr("关于作者"));
+   connect(about_author,SIGNAL(triggered(bool)),this,SLOT(showauthor()));
 }
 
 void Livemainwin::createMenu()
@@ -50,7 +52,7 @@ void Livemainwin::createMenu()
     subtitleMenu->addAction(turn_tv_mod);
 
     aboutMenu = menuBar()->addMenu(tr("关于"));
-    aboutMenu->addAction(disallinfo);
+    aboutMenu->addAction(about_author);
 
 }
 
@@ -75,6 +77,11 @@ void Livemainwin::turntv()
     delete movie_excutool;
 }
 
+void Livemainwin::showauthor()
+{
+    QMessageBox::about(this,tr("作者"),tr("美国的华莱士"));
+    return;
+}
 
 Livemainwin::~Livemainwin()
 {

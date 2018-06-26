@@ -71,8 +71,6 @@ void Ceshi::showfile()
 
 
 
-
-
 Ceshi::~Ceshi()
 {
 

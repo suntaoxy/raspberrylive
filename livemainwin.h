@@ -34,6 +34,7 @@ private:
     QAction* disallinfo;
     QAction* turn_movie_mod;
     QAction* turn_tv_mod;
+    QAction* about_author;
     QToolBar* jinduToolBar;
     QToolButton* startlive;
 
@@ -43,6 +44,7 @@ signals:
 public slots:
     void turntv();
     void turnmovie();
+    void showauthor();
 };
 
 #endif // LIVEMAINWIN_H
