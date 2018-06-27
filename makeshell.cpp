@@ -64,7 +64,7 @@ void creat_srt_shell(QString path_movie,QString rtmp,QString path_srt)
         writeinshell<<"#!/bin/bash"<<left<<endl;
         writeinshell<<"while true"<<left<<endl;
         writeinshell<<"do"<<left<<endl;
-        writeinshell<<"cd "+ filemovie.absolutePath()+<<left<<endl;
+        writeinshell<<"cd "+ filemovie.absolutePath()<<left<<endl;
         writeinshell<<ffmpeg_order_fore + "\"" +filemovie.fileName()+"\"" +ffmpeg_order_mid+" \"" + rtmp +"\" "<<left<<endl;
         writeinshell<<"done"<<left<<endl;
      #endif
