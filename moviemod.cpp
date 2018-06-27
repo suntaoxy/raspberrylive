@@ -66,9 +66,26 @@ void Moviemod::mkandexcute_shell()
 #if defined(Q_OS_WIN32)
     QString pathofshell = QDir::currentPath() + "/raspliveshell.bat" ;
     qDebug() << pathofshell;
-    char* pathoooof = pathofshell.toLatin1().data();
+   // char* pathoooof = pathofshell.toLatin1().data();
     //system(pathoooof);
     process_0->start("cmd.exe",QStringList() << "/c" << pathofshell);
+  /*  process_0->start("cmd.exe",QStringList() << "/c" << "ping 123.206.209.50");
+    qint64 maxSize = 512;
+    char buffer[maxSize];
+    qint64 len;
+    while(true)
+    {
+        len = process_0->readLine(buffer, maxSize);
+        qDebug()<<"buffer len"<<len;
+
+        if(len <= 0) {
+            break;
+        }
+        QString str = QString::fromLocal8Bit(buffer);
+        qDebug()<<"qstring len"<<str.length();
+        qDebug()<<str;
+        qDebug()<<"";
+    }  */
 #elif defined(Q_OS_LINUX)
     QString pathofshell = "sh "+QDir::currentPath() + "/raspliveshell.sh" ;
     qDebug() << pathofshell;
