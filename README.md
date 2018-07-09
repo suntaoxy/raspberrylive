@@ -2,48 +2,37 @@
 A tool which can play videos on Live site by raspberry
 
 一个树莓派用的直播工具
+同样适用x86的windows和linux平台
 鉴于斗鱼b站等直播网站经常改推流码，每次重写脚本很烦。所以做个小工具
 
-首先必须安装ffmpeg，树莓派坑爹的软件源并没有这个，所以需要自己手动编译
-安装ffmpeg和解码器
-先安装解码器（注意要一句一句执行……）
+推荐树莓派系统是raspbian stretch 即debian 9 这个系统的软件源很多软件是比较新的，省去很多麻烦
+如果是debian 8 系统 请看wiki手动编译暗转ffmpeg方法
 
-sudo git clone git://git.videolan.org/x264
+首先安装ffmpeg
+sudo apt install ffmpeg
 
-cd x264
+安装qt（如果需要）
+sudo apt install qt5-default qtcreator
 
-sudo ./configure --host=arm-unknown-linux-gnueabi --enable-static --disable-opencl
+下载源代码
+git clone https://github.com/suntaobuaa/raspberrylive
 
-make
+cd /raspberrylive
 
-sudo make install
-
-cd ..
-
-rm -rf x264
-
-
-再安装ffmpeg（一句一句执行……）
-
-sudo git clone git://source.ffmpeg.org/ffmpeg.git
-
-cd ffmpeg
-
-sudo ./configure --arch=armel --target-os=linux --enable-gpl --enable-libx264 --enable-nonfree
+qmake
 
 make
+即可
 
-sudo make install
+或者用qtcreator打开.pro.user 文件  编译运行
 
-cd ..
+目前支持两个模式，电影模式支持推流时添加字幕，但是树莓派性能不够，必须在x86平台运行
+电视剧模式，自动顺序播放文件夹下所有视频文件，不支持字幕功能，如需字幕，必须视频自带硬字幕
+未来考虑添加批量烧写字幕功能
 
-rm -rf ffmpeg
 
 
 
-注意事项：
 
-树莓派运行qt软件会出各种莫名其妙的bug，比如键盘映射出错，“5”对应“back”，“6” 对应回车
 
-交叉编译实在看的头皮发麻，树莓派下的qtcreator又有各种问题。。。调试起来太麻烦，正在学习ffmpeg，以后再慢慢加功能吧。。下一步话能在视频里加文字...
 
