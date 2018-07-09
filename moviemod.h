@@ -14,7 +14,7 @@ class Moviemod : public QWidget
 {
     Q_OBJECT
 public:
-    explicit Moviemod(QWidget *parent = nullptr);
+    explicit Moviemod(QWidget *parent);
     ~Moviemod();
     QString path_srt;
 private:
