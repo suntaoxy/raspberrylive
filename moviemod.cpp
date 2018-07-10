@@ -3,6 +3,7 @@
 #include <QDir>
 #include <QProcess>
 #include <QDebug>
+#include <QFile>
 #include "makeshell.h"
 Moviemod::Moviemod(QWidget *parent) : QWidget(parent)
 {
@@ -43,6 +44,7 @@ Moviemod::Moviemod(QWidget *parent) : QWidget(parent)
     connect(choosemoive,SIGNAL(clicked()),this,SLOT(showfile()));
     connect(closebtn,SIGNAL(clicked()),process_0,SLOT(kill()));
     connect(choosesrt,SIGNAL(clicked(bool)),this,SLOT(showsrt()));
+    connect(fswatcher,SIGNAL(directoryChanged(QString)),this,SLOT(setsrt(QString)));
 
 }
 
@@ -66,8 +68,6 @@ void Moviemod::mkandexcute_shell()
 #if defined(Q_OS_WIN32)
     QString pathofshell = QDir::currentPath() + "/raspliveshell.bat" ;
     qDebug() << pathofshell;
-   // char* pathoooof = pathofshell.toLatin1().data();
-    //system(pathoooof);
     process_0->start("cmd.exe",QStringList() << "/c" << pathofshell);
   /*  process_0->start("cmd.exe",QStringList() << "/c" << "ping 123.206.209.50");
     qint64 maxSize = 512;
@@ -94,6 +94,43 @@ void Moviemod::mkandexcute_shell()
 
 
 }
+
+void Moviemod::downsrt()
+{
+    if(choosemoive->text().isEmpty())
+        return;
+
+    QString path_movie=choosemoive->text();
+    QFileInfo mvinfo(path_movie);
+    fswatcher->addPath(mvinfo.absolutePath());
+    process_0->start("python3 getsrt.py"+path_movie);
+
+}
+
+void Moviemod::setsrt(QString path)
+{
+
+    QDir mvdir(path);
+    QStringList str_list;
+    str_list<<"*";
+    QFileInfoList filelist=mvdir.entryInfoList(str_list,QDir::Files,QDir::Name);
+    foreach(QFileInfo finfo, filelist)
+    {
+        if(finfo.suffix()=="srt")
+        {
+            QString shell="ffmpeg -i "+finfo.fileName()+" newname.ass";
+            process_0->start(shell);
+        }
+        if(finfo.suffix()=="ass")
+        {
+            choosesrt->setText(finfo.absoluteFilePath());
+            break;
+        }
+
+    }
+
+}
+
 
 Moviemod::~Moviemod()
 {

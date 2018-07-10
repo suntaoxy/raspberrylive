@@ -3,6 +3,8 @@
 #include<QFile>
 #include<QFileDialog>
 #include<QMessageBox>
+#include<memory>
+
 Livemainwin::Livemainwin(QWidget *parent) : QMainWindow(parent)
 {
     setWindowTitle(tr("树莓派直播工具"));
@@ -10,8 +12,6 @@ Livemainwin::Livemainwin(QWidget *parent) : QMainWindow(parent)
     excutool =new Ceshi(this);
     movie_excutool=new Moviemod(this);
     setCentralWidget(excutool);
-    startlive = new QToolButton;
-    startlive->setIcon(QIcon("pig.png"));
 
     createAction();
     createMenu();
@@ -39,6 +39,11 @@ void Livemainwin::createAction()
    about_author = new QAction(tr("关于作者"),this);
    about_author->setStatusTip(tr("关于作者"));
    connect(about_author,SIGNAL(triggered(bool)),this,SLOT(showauthor()));
+
+   download_srt = new QAction(QIcon("icon/down.png"),tr("下载字幕"),this);
+   download_srt->setStatusTip(tr("下载匹配的字幕文件"));
+   connect(download_srt,SIGNAL(triggered(bool)),movie_excutool,SLOT(downsrt()));
+
 }
 
 void Livemainwin::createMenu()
@@ -50,6 +55,7 @@ void Livemainwin::createMenu()
     subtitleMenu = menuBar()->addMenu(tr("字幕模式"));
     subtitleMenu->addAction(turn_movie_mod);
     subtitleMenu->addAction(turn_tv_mod);
+    subtitleMenu->addAction(download_srt);
 
     aboutMenu = menuBar()->addMenu(tr("关于"));
     aboutMenu->addAction(about_author);
@@ -61,6 +67,9 @@ void Livemainwin::createToolBar()
     jinduToolBar = addToolBar("mod");
     jinduToolBar->addAction(turn_movie_mod);
     jinduToolBar->addAction(turn_tv_mod);
+
+    srtToolBar = addToolBar("zimu");
+    srtToolBar->addAction(download_srt);
 }
 
 void Livemainwin::turnmovie()
@@ -82,6 +91,8 @@ void Livemainwin::showauthor()
     QMessageBox::about(this,tr("作者"),tr("美国的华莱士"));
     return;
 }
+
+
 
 Livemainwin::~Livemainwin()
 {

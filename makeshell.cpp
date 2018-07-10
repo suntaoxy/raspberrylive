@@ -4,7 +4,7 @@
 #include<QTextStream>
 #include<QtDebug>
 #include<QDir>
-#include<ceshi.h>
+
 
 void creat_shell(QString pwd,QString rtmp)
 {
@@ -58,6 +58,10 @@ void creat_srt_shell(QString path_movie,QString rtmp,QString path_srt)
         writeinshell<<ffmpeg_order_fore + "\"" +filemovie.fileName()+"\"" +ffmpeg_order_mid+" \"" + rtmp +"\" \r\n"<<left;
         writeinshell<<"pause"<<left<<endl;
      #elif defined(Q_OS_LINUX)
+        if(filesrt.suffix()=="ass")
+        {
+            QString ffmpeg_order_mid =" -vf ass="+filesrt.fileName()+" -vcodec h264 -acodec aac -b:a 128k -f flv ";
+        }
         QString ffmpeg_order_fore =" ffmpeg -re -i ";
         QString ffmpeg_order_mid =" -vf subtitles="+filesrt.fileName()+" -vcodec h264 -acodec aac -b:a 128k -f flv ";
         QTextStream writeinshell(&file);

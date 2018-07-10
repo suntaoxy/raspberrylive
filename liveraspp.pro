@@ -35,3 +35,6 @@ HEADERS  += ceshi.h \
     moviemod.h
 
 RESOURCES +=
+
+DISTFILES += \
+    getsrt.py

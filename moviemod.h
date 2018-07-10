@@ -8,6 +8,7 @@
 #include <QLineEdit>
 #include <QFileDialog>
 #include <QProcess>
+#include <QFileSystemWatcher>
 
 
 class Moviemod : public QWidget
@@ -16,7 +17,7 @@ class Moviemod : public QWidget
 public:
     explicit Moviemod(QWidget *parent);
     ~Moviemod();
-    QString path_srt;
+  //  QString path_srt;
 private:
     QLabel* websitelabel;
     QLabel* streamlabel;
@@ -31,6 +32,8 @@ private:
 
     QProcess* process_0;
 
+    QFileSystemWatcher* fswatcher=nullptr;
+
 
 signals:
 
@@ -39,6 +42,8 @@ public slots:
     void mkandexcute_shell();
     void showfile();
     void showsrt();
+    void downsrt();
+    void setsrt(QString);
 
 };
 
