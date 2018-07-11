@@ -11,7 +11,7 @@ Livemainwin::Livemainwin(QWidget *parent) : QMainWindow(parent)
     setGeometry(500,100,400,200);
     excutool =new Ceshi(this);
     movie_excutool=new Moviemod(this);
-    setCentralWidget(excutool);
+    setCentralWidget(movie_excutool);
 
     createAction();
     createMenu();
@@ -74,16 +74,18 @@ void Livemainwin::createToolBar()
 
 void Livemainwin::turnmovie()
 {
-    movie_excutool =new Moviemod(this);
+   // movie_excutool =new Moviemod(this);
+    centralWidget()->setParent(0);
     setCentralWidget(movie_excutool);
-    delete excutool;
+
 }
 
 void Livemainwin::turntv()
 {
-    excutool =new Ceshi(this);
+ //   excutool =new Ceshi(this);
+    centralWidget()->setParent(0);
     setCentralWidget(excutool);
-    delete movie_excutool;
+
 }
 
 void Livemainwin::showauthor()

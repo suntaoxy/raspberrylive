@@ -32,8 +32,7 @@ private:
 
     QProcess* process_0;
 
-    QFileSystemWatcher* fswatcher=nullptr;
-
+    QFileSystemWatcher fswatcher;
 
 signals:
 

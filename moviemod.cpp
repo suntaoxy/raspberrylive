@@ -5,6 +5,7 @@
 #include <QDebug>
 #include <QFile>
 #include "makeshell.h"
+#include<QApplication>
 Moviemod::Moviemod(QWidget *parent) : QWidget(parent)
 {
     websitelabel=new QLabel(tr("网址"));
@@ -21,6 +22,8 @@ Moviemod::Moviemod(QWidget *parent) : QWidget(parent)
     choosesrt=new QPushButton;
     choosesrt->setText(tr("选择字幕"));
     srt_name=new QLineEdit;
+
+ //   fswatcher = new QFileSystemWatcher(this);
 
 
     QGridLayout* mainlayout=new QGridLayout(this);
@@ -44,7 +47,9 @@ Moviemod::Moviemod(QWidget *parent) : QWidget(parent)
     connect(choosemoive,SIGNAL(clicked()),this,SLOT(showfile()));
     connect(closebtn,SIGNAL(clicked()),process_0,SLOT(kill()));
     connect(choosesrt,SIGNAL(clicked(bool)),this,SLOT(showsrt()));
-    connect(fswatcher,SIGNAL(directoryChanged(QString)),this,SLOT(setsrt(QString)));
+
+    connect(&fswatcher,SIGNAL(directoryChanged(QString)),this,SLOT(setsrt(QString)));
+
 
 }
 
@@ -97,13 +102,17 @@ void Moviemod::mkandexcute_shell()
 
 void Moviemod::downsrt()
 {
-    if(choosemoive->text().isEmpty())
+    if(moviename->text().isEmpty())
         return;
 
-    QString path_movie=choosemoive->text();
+    QString path_movie=moviename->text();
     QFileInfo mvinfo(path_movie);
-    fswatcher->addPath(mvinfo.absolutePath());
-    process_0->start("python3 getsrt.py"+path_movie);
+    fswatcher.addPath(mvinfo.absolutePath());
+    qDebug()<<mvinfo.absolutePath();
+    QString shell = "python3 "+QApplication::applicationDirPath()+"/getsrt.py "+path_movie;
+#if defined(Q_OS_LINUX)
+    process_0->start(shell);
+#endif
 
 }
 
@@ -123,7 +132,7 @@ void Moviemod::setsrt(QString path)
         }
         if(finfo.suffix()=="ass")
         {
-            choosesrt->setText(finfo.absoluteFilePath());
+            srt_name->setText(finfo.absoluteFilePath());
             break;
         }
 
