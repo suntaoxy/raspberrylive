@@ -110,21 +110,15 @@ def writeSub(info, fname = 'D:/Matrix.mkv' ,lang='chn'):
         sys.stdout.write("Subtitle: {}\nDelay: {}\nDescription: {}\n\n".format(name, subs[1], subs[2]))
         sys.stdout.flush()
         
-def downloadSub(fname, lang='all'):
+def downloadSub(fname, lang='chn'):
     ''' lang = 'chn' or 'eng' or 'all' '''
-    if lang in ('chn', 'eng'):
-        langs = [lang]
+    data = makeData(fname, lang)
+    info = getSubInfo(data)
+    if info:
+        writeSub(info, fname, lang)
     else:
-        langs = ('chn', 'eng')
-    
-    for lang in langs:
-        data = makeData(fname, lang)
-        info = getSubInfo(data)
-        if info:
-            writeSub(info, fname, lang)
-        else:
-            sys.stdout.write("no subtitle found\n")
-            sys.stdout.flush()
+        sys.stdout.write("no subtitle found\n")
+        sys.stdout.flush()
         
 if __name__ == '__main__':
     downloadSub(sys.argv[1])

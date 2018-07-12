@@ -52,18 +52,32 @@ void creat_srt_shell(QString path_movie,QString rtmp,QString path_srt)
     {
      #if defined(Q_OS_WIN32)
         QString ffmpeg_order_fore =" ffmpeg -re -i ";
-        QString ffmpeg_order_mid =" -vf subtitles="+filesrt.fileName()+" -vcodec h264 -acodec aac -b:a 128k -f flv ";
+        QString ffmpeg_order_mid;
+        if(filesrt.suffix()=="ass")
+        {
+            ffmpeg_order_mid =" -vf \"ass="+filesrt.fileName()+"\" -vcodec h264 -acodec aac -b:a 128k -f flv ";
+        }
+        else
+        {
+            ffmpeg_order_mid =" -vf subtitles="+filesrt.fileName()+" -vcodec h264 -acodec aac -b:a 128k -f flv ";
+        }
+
         QTextStream writeinshell(&file);
         writeinshell<<"cd /d "+ filemovie.absolutePath()+"\r\n"<<left;
         writeinshell<<ffmpeg_order_fore + "\"" +filemovie.fileName()+"\"" +ffmpeg_order_mid+" \"" + rtmp +"\" \r\n"<<left;
         writeinshell<<"pause"<<left<<endl;
      #elif defined(Q_OS_LINUX)
+        QString ffmpeg_order_fore =" ffmpeg -re -i ";
+        QString ffmpeg_order_mid;
         if(filesrt.suffix()=="ass")
         {
-            QString ffmpeg_order_mid =" -vf ass="+filesrt.fileName()+" -vcodec h264 -acodec aac -b:a 128k -f flv ";
+            ffmpeg_order_mid =" -vf \"ass="+filesrt.fileName()+"\" -vcodec h264 -acodec aac -b:a 128k -f flv ";
         }
-        QString ffmpeg_order_fore =" ffmpeg -re -i ";
-        QString ffmpeg_order_mid =" -vf subtitles="+filesrt.fileName()+" -vcodec h264 -acodec aac -b:a 128k -f flv ";
+        else
+        {
+            ffmpeg_order_mid =" -vf subtitles="+filesrt.fileName()+" -vcodec h264 -acodec aac -b:a 128k -f flv ";
+        }
+
         QTextStream writeinshell(&file);
         writeinshell<<"#!/bin/bash"<<left<<endl;
         writeinshell<<"while true"<<left<<endl;

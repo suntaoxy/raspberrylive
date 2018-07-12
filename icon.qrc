@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/icon">
+        <file>icon/film.png</file>
+        <file>icon/tv.png</file>
+        <file>icon/down.png</file>
+        <file>icon/live.png</file>
+    </qresource>
+</RCC>

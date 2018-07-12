@@ -74,23 +74,7 @@ void Moviemod::mkandexcute_shell()
     QString pathofshell = QDir::currentPath() + "/raspliveshell.bat" ;
     qDebug() << pathofshell;
     process_0->start("cmd.exe",QStringList() << "/c" << pathofshell);
-  /*  process_0->start("cmd.exe",QStringList() << "/c" << "ping 123.206.209.50");
-    qint64 maxSize = 512;
-    char buffer[maxSize];
-    qint64 len;
-    while(true)
-    {
-        len = process_0->readLine(buffer, maxSize);
-        qDebug()<<"buffer len"<<len;
 
-        if(len <= 0) {
-            break;
-        }
-        QString str = QString::fromLocal8Bit(buffer);
-        qDebug()<<"qstring len"<<str.length();
-        qDebug()<<str;
-        qDebug()<<"";
-    }  */
 #elif defined(Q_OS_LINUX)
     QString pathofshell = "sh "+QDir::currentPath() + "/raspliveshell.sh" ;
     qDebug() << pathofshell;
@@ -109,15 +93,21 @@ void Moviemod::downsrt()
     QFileInfo mvinfo(path_movie);
     fswatcher.addPath(mvinfo.absolutePath());
     qDebug()<<mvinfo.absolutePath();
-    QString shell = "python3 "+QApplication::applicationDirPath()+"/getsrt.py "+path_movie;
+
 #if defined(Q_OS_LINUX)
+    QString shell = "python3 "+QApplication::applicationDirPath()+"/getsrt.py "+path_movie;
     process_0->start(shell);
+#elif defined(Q_OS_WIN32)
+    QString shell = QApplication::applicationDirPath()+"/getsrt.py "+path_movie;
+    qDebug()<<shell;
+    process_0->start("cmd.exe",QStringList() << "/c" << shell);
 #endif
 
 }
 
 void Moviemod::setsrt(QString path)
 {
+  //  qDebug()<<path;
 
     QDir mvdir(path);
     QStringList str_list;
@@ -127,17 +117,25 @@ void Moviemod::setsrt(QString path)
     {
         if(finfo.suffix()=="srt")
         {
-            QString shell="ffmpeg -i "+finfo.fileName()+" newname.ass";
+            QString shell="ffmpeg -i "+finfo.absoluteFilePath()+" newname.ass";
+            #if defined(Q_QS_LINUX)
             process_0->start(shell);
-        }
-        if(finfo.suffix()=="ass")
-        {
-            srt_name->setText(finfo.absoluteFilePath());
+            #elif defined(Q_OS_WIN32)
+            qDebug()<<shell;
+            process_0->start("cmd.exe",QStringList() << "/c" << shell);
+            #endif
             break;
         }
 
     }
-
+    foreach(QFileInfo finfo, filelist)
+    {
+        if(finfo.suffix()=="ass"||finfo.suffix()=="srt")
+        {
+            srt_name->setText(finfo.absoluteFilePath());
+            break;
+        }
+    }
 }
 
 

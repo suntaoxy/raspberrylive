@@ -34,7 +34,8 @@ HEADERS  += ceshi.h \
     livemainwin.h \
     moviemod.h
 
-RESOURCES +=
+RESOURCES += \
+    icon.qrc
 
 DISTFILES += \
     getsrt.py
