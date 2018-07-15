@@ -39,3 +39,5 @@ RESOURCES += \
 
 DISTFILES += \
     getsrt.py
+
+

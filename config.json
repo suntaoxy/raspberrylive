@@ -1,0 +1,11 @@
+{
+    "roomId": 3746026,
+    "rtmp": {
+        "url": "rtmp://txy.live-send.acg.tv/live-txy/",
+        "code": ""
+    },
+    "cookie":"", 
+    "danmu": {
+        "timestamp": 1531583460.0
+    }
+}

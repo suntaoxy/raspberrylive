@@ -118,9 +118,9 @@ void Moviemod::setsrt(QString path)
         if(finfo.suffix()=="srt")
         {
             QString shell="ffmpeg -i "+finfo.absoluteFilePath()+" newname.ass";
-            #if defined(Q_QS_LINUX)
+        #if defined(Q_QS_LINUX)
             process_0->start(shell);
-            #elif defined(Q_OS_WIN32)
+        #elif defined(Q_OS_WIN32)
             qDebug()<<shell;
             process_0->start("cmd.exe",QStringList() << "/c" << shell);
             #endif
