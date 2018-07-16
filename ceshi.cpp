@@ -3,6 +3,7 @@
 #include <QDir>
 #include <QProcess>
 #include <QDebug>
+#include<QApplication>
 #include "makeshell.h"
 
 Ceshi::Ceshi(QWidget *parent)
@@ -49,12 +50,13 @@ void Ceshi::mkandexcute_shell()
 {
     QString rtmp = websitetext->text()+streamtext->text();
 
-    creat_shell(pathname->text(),rtmp);
-
-    QString pathofshell = "sh " + QDir::currentPath() + "/raspliveshell.sh" ;
-
-   // qDebug() << pathofshell;
+    creat_shell_notice(pathname->text(),rtmp);
+    QString pathofshell = "sh "+QDir::currentPath() + "/raspliveshell.sh" ;
     process_0->start(pathofshell);
+
+
+    qDebug() << pathofshell;
+
 }
 void Ceshi::showfile()
 {

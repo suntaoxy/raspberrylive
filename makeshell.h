@@ -3,6 +3,7 @@
 #include<QtDebug>
 
 void creat_shell(QString,QString); //连续剧模式
-void creat_srt_shell(QString,QString,QString);  //单集模式
+void creat_srt_shell(QString,QString,QString);
+void creat_shell_notice(QString,QString);//单集模式
 
 #endif // MAKESHELL_H
